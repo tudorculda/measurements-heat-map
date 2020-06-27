@@ -1,10 +1,40 @@
 .sidebar{
-    background-color: lightgray;    
-    border: solid 2px gray;
+    background-color: #1f1e1f;    
+    border: solid 2px black;
     border-radius: 0.3em;
     padding-top: 1em;
     text-align: center;
+    margin: 10px;
 }
+.container-fluid{    
+    background-color: #3a393a;
+}
+
 .canvasContainer{
-    background-color: lightsteelblue;
+    margin: 10px;
+    border: solid 2px black;
+    border-radius: 0.3em;
+    padding-top: 1em;
+    position: relative;
+    background-color: inherit;
+
+}
+.row{
+    background-color: inherit;
+}
+
+.divTitle{
+    color: white;
+    /* background-color: yellow; */
+    position: absolute;
+    top:-.8rem;
+    background-color: inherit;
+}
+.divTitle::after{
+    content: " ";
+    white-space: pre;
+}
+.divTitle::before{
+    content: " ";
+    white-space: pre;
 }
