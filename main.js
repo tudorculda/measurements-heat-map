@@ -76,33 +76,42 @@ function getGeometricColorMix( p, points ){
     return c;
 }
 
+function drawHeatMap(ctx, points){
+    ctx.globalCompositeOperation = 'destination-over'; // to show the cross points over the gradient
+    let xcs = points.map( p => p.x);
+    let ycs = points.map( p => p.y);
+    let xmin = Math.min(...xcs);
+    let xmax = Math.max(...xcs);
+    let ymin = Math.min(...ycs);
+    let ymax = Math.max(...ycs);
+    let x, y;
+    let mixColor;
+
+    // iterate all the pixels between the given points
+    for( x = xmin; x < xmax; x++ ){
+        for( y = ymin; y < ymax; y++ ){
+            mixColor = getGeometricColorMix({x:x, y:y}, points);
+            ctx.fillStyle = mixColor;
+            ctx.fillRect(x, y, 1, 1);
+        }
+    }
+}
+
 let points = [
-    {x:10, y:10, c:"#FF0000"},
-    {x:70, y:150, c:"#FFFF00"},
-    {x:224, y:300, c:"#00FF00"},
-    {x:121, y:100, c:"#00FFFF"},
-    {x:160, y:10, c:"#FF00FF"},
+
+    {x:60, y:150, c:"#FF0000"},
+    {x:60, y:10, c:"#FF0000"},
+	{x:160, y:150, c:"#FFFF00"},
+    {x:160, y:10, c:"#FFFF00"},
+	
+	
 ]; // these are the starting points for drawing the gradient
 
 
 var canv = document.getElementById("myCanvas");
 var ctx = canv.getContext("2d");
-putCross(ctx, points); // optional, only to show the original point position
-ctx.globalCompositeOperation = 'destination-over'; // to show the cross points over the gradient
-let xcs = points.map( p => p.x);
-let ycs = points.map( p => p.y);
-let xmin = Math.min(...xcs);
-let xmax = Math.max(...xcs);
-let ymin = Math.min(...ycs);
-let ymax = Math.max(...ycs);
-let x, y;
-let mixColor;
 
-// iterate all the pixels between the given points
-for( x = xmin; x < xmax; x++ ){
-    for( y = ymin; y < ymax; y++ ){
-        mixColor = getGeometricColorMix({x:x, y:y}, points);
-        ctx.fillStyle = mixColor;
-        ctx.fillRect(x, y, 1, 1);
-    }
-}
+drawHeatMap(ctx, points);
+putCross(ctx, points); // optional, only to show the original point position
+
+
